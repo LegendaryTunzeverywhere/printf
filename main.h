@@ -1,5 +1,5 @@
-#ifndef MAIN_H_FILE
-#define MAIN_H_FILE
+#ifndef _MAIN_H_FILE_
+#define _MAIN_H_FILE_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,20 +10,19 @@
 /**
  * struct - Entry point
  * @fmt: char pointer of the format specifer
- * @i: integer pointer to function for the conversion format specifier
+ * @ptr: integer pointer to function for the conversion format specifier
  */
 
-typedef struct format
+typedef struct func
 {
 	char *fmt;
 	int (*ptr)();
-} format_match;
-
-int printf_integer(va_list args);
-int printf_decimal(va_list args);
-int printf_37(void);
-int printf_string(va_list val);
-int printf_char(va_list val);
+} func_t;
+int print_char(va_list num);
+int print_string(va_list num);
+int print_dec(va_list num);
+int print_int(va_list ar_numlist);
+int (*get_function(char s))(va_list num);
 int _putchar(char c);
 int _printf(const char *format, ...);
 

@@ -7,39 +7,41 @@
  *
  * Return: the number of characters printed.
  */
-int _printf(const char * const format, ...)
+int _printf(const char *format, ...)
 {
-	format_match f[] = {
-		{"%c", printf_char},
-		{"%s", printf_string},
-		{"%%", printf_37}, {"%d", printf_decimal},
-		{"%i", printf_integer}
-	};
-	va_list args;
-	int a = 0, b, len = 0;
+	int add = -1;
 
-	va_start(args, format);
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
-		return (-1);
-
-Link:
-	while (format[a] != '\0')
+	if (format)
 	{
-		b = 13;
-		while (b >= 0)
+		int a;
+		va_list num;
+		int (*saveptr)(va_list);
+
+		va_start(num, format);
+		add =0;
+
+		for (a = 0; format[a]; a++)
 		{
-			if (f[b].fmt[0] == format[a] && f[b].fmt[1] == format[a + 1])
 			{
-				len += f[b].ptr(args);
-				a = a + 2;
-				goto Link;
+				if (format[a] == '%')
+				{
+					if (format[a + 1] == '%')
+					{
+						add += _putchar(format[a]);
+						a++;
+					}
+					else if (format[a + 1])
+					{
+						saveptr = get_function(format[a + 1]);
+						add += saveptr ? saveptr(num) : (_putchar(format[a]) + _putchar(format[a + 1]));
+						a++;
+					}
+				}
+				else
+					add += _putchar(format[a]);
 			}
-			b--;
+			va_end(num);
 		}
-		_putchar(format[a]);
-		len++;
-		a++;
 	}
-	va_end(args);
-	return (len);
+return (add);
 }

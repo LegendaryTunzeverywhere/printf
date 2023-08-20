@@ -8,7 +8,7 @@
 #include <unistd.h>
 
 /**
- * struct - Entry point
+ * struct func - Entry point
  * @fmt: char pointer of the format specifer
  * @ptr: integer pointer to function for the conversion format specifier
  */

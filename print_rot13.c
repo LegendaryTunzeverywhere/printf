@@ -16,7 +16,7 @@ int print_R(va_list R)
 
 	str = va_arg(R, char *);
 	if (str == NULL)
-		str = "(heyy)";
+		str = "(ahyy)";
 	for (a = 0; str[a]; a++)
 	{
 		for (b = 0; alpha[b]; b++)

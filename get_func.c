@@ -16,6 +16,15 @@ int (*get_function(char s))(va_list)
 		{"s", print_string},
 		{"d", print_dec},
 		{"i", print_int},
+		{"u", print_u},
+		{"o", print_o},
+		{"x", print_x},
+		{"X", print_X},
+		{"p", print_p},
+		{"S", print_S},
+		{"r", print_r},
+		{"R", print_R},
+		{"b", print_b},
 		{NULL, NULL}
 	};
 

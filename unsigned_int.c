@@ -1,6 +1,39 @@
 #include "main.h"
 
 /**
+ * print_u - Entry point
+ * @u: unsigned int to be printed.
+ *
+ * Description: prints an unsigned int in decimal.
+ *
+ * Return: number of digits printed.
+ */
+int print_u(va_list u)
+{
+	unsigned int a[10];
+	unsigned int b, c, d, sum_up;
+	int add;
+
+	d = va_arg(u, unsigned int);
+	c = 1000000000;
+	a[0] = d / c;
+	for (b = 1; b < 10; b++)
+	{
+		c /= 10;
+		a[b] = (d / c) % 10;
+	}
+	for (b = 0, sum_up = 0, add = 0; b < 10; b++)
+	{
+		sum_up += a[b];
+		if (sum_up || b == 9)
+		{
+			_putchar('0' + a[b]);
+			add++;
+		}
+	}
+	return (add);
+}
+/**
  * print_o - takes an unsigned int and prints it in octal notation
  * @o: unsigned int to print
  *
@@ -45,7 +78,7 @@ int print_b(va_list b)
 	int count;
 
 	n = va_arg(b, unsigned int);
-	m = 2147483648; /* (2 ^ 31) */
+	m = 2147483648;
 	a[0] = n / m;
 	for (i = 1; i < 32; i++)
 	{
@@ -56,37 +89,6 @@ int print_b(va_list b)
 	{
 		sum += a[i];
 		if (sum || i == 31)
-		{
-			_putchar('0' + a[i]);
-			count++;
-		}
-	}
-	return (count);
-}
-/**
- * print_u - prints an unsigned in in decimal notation
- * @u: unsigned int to print
- *
- * Return: number of digits printed
- */
-int print_u(va_list u)
-{
-	unsigned int a[10];
-	unsigned int i, m, n, sum;
-	int count;
-
-	n = va_arg(u, unsigned int);
-	m = 1000000000; /* (10 ^ 9) */
-	a[0] = n / m;
-	for (i = 1; i < 10; i++)
-	{
-		m /= 10;
-		a[i] = (n / m) % 10;
-	}
-	for (i = 0, sum = 0, count = 0; i < 10; i++)
-	{
-		sum += a[i];
-		if (sum || i == 9)
 		{
 			_putchar('0' + a[i]);
 			count++;

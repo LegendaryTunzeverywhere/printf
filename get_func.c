@@ -1,29 +1,27 @@
 #include "main.h"
 
 /**
- * get_function - Entry point
- * @s: array to inspect
- *
- * Description: search for formatter an return
- * the correct one.
- * Return: return a func.
- */
-int (*get_function(char s))(va_list)
+ * get_func - search and return the correct function
+ * @s: array to check
+ * Return: return a function
+ **/
+
+int (*get_func(char s))(va_list)
 {
-	func_t funcs[] = {
-		{"c", print_char},
-		{"s", print_string},
-		{"d", print_dec},
-		{"i", print_int},
+	op_t ops[] = {
+		{"c", _printChar},
+		{"s", _printString},
+		{"d", _printDec},
+		{"i", _printInt},
 		{NULL, NULL}
 	};
 
-	int a;
+	int i;
 
-	for (a = 0; funcs[a].fmt != NULL; a++)
+	for (i = 0; ops[i].c != NULL; i++)
 	{
-		if (*funcs[a].fmt == s)
-			return (funcs[a].ptr);
+		if (*ops[i].c == s)
+			return (ops[i].f);
 	}
 	return (NULL);
 }

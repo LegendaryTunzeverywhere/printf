@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdlib.h>
 
 /**
  * print_R - prints a string in rot13
@@ -7,49 +6,33 @@
  *
  * Return: number of chars printed
  */
-
-
-/**
- * rot13 - Encodes a string using rot13.
- * @str: The string to be encoded.
- *
- * Return: A pointer to the encoded string.
- */
-char *rot13(char *str)
+int print_R(va_list R)
 {
-	int indx1 = 0, indx2;
-	char alphabet[52] = {'A', 'B', 'C', 'D', 'E', 'F',
-				'G', 'H', 'I', 'J', 'K', 'L',
-				'M', 'N', 'O', 'P', 'Q', 'R',
-				'S', 'T', 'U', 'V', 'W', 'X',
-				'Y', 'Z', 'a', 'b', 'c', 'd',
-				'e', 'f', 'g', 'h', 'i', 'j',
-				'k', 'l', 'm', 'n', 'o', 'p',
-				'q', 'r', 's', 't', 'u', 'v',
-				'w', 'x', 'y', 'z'};
-	char rot13key[52] = {'N', 'O', 'P', 'Q', 'R', 'S',
-				'T', 'U', 'V', 'W', 'X', 'Y',
-				'Z', 'A', 'B', 'C', 'D', 'E',
-				'F', 'G', 'H', 'I', 'J', 'K',
-				'L', 'M', 'n', 'o', 'p', 'q',
-				'r', 's', 't', 'u', 'v', 'w',
-				'x', 'y', 'z', 'a', 'b', 'c',
-				'd', 'e', 'f', 'g', 'h', 'i',
-				'j', 'k', 'l', 'm'};
+	char *str;
+	unsigned int a, b;
+	int add = 0;
+	char alpha[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char rotkey[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstvwxyzabcdefghijklm";
 
-	while (str[indx1])
+	str = va_arg(R, char *);
+	if (str == NULL)
+		str = "(heyy)";
+	for (a = 0; str[a]; a++)
 	{
-		for (indx2 = 0; indx2 < 52; indx2++)
+		for (b = 0; alpha[b]; b++)
 		{
-			if (str[indx1] == alphabet[indx2])
+			if (alpha[b] == str[a])
 			{
-				str[indx1] = rot13key[indx2];
+				_putchar(rotkey[b]);
+				add++;
 				break;
 			}
 		}
-
-		indx1++;
+		if (!alpha[b])
+		{
+			_putchar(str[a]);
+			add++;
+		}
 	}
-
-	return (str);
+	return (add);
 }

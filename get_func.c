@@ -24,7 +24,7 @@ int (*get_function(char s))(va_list)
 		{"S", print_S},
 		{"r", print_r},
 		{"R", print_R},
-		{"b", print_b},
+		{"b", print_binary},
 		{NULL, NULL}
 	};
 

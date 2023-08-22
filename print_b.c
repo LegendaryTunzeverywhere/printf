@@ -6,7 +6,7 @@
  *
  * Return: number of digits printed
  */
-int print_b(va_list b)
+int print_binary(va_list b)
 {
     unsigned int n = va_arg(b, unsigned int);
     unsigned int a[32];
